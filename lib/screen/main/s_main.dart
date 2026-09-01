@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_routine_app/common/datetime_extension.dart';
 import 'package:my_routine_app/screen/main/search/f_search.dart';
 import 'package:my_routine_app/screen/main/todo/f_todo.dart';
 
@@ -14,12 +15,17 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _screens = [TodoFragment(), SearchFragment()];
+  DateTime _selectedDate = DateTime.now();
+  bool _isDateSelected = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .inversePrimary,
         title: Text('My Routine'),
       ),
       body: Center(child: _screens[_selectedIndex]),
@@ -46,12 +52,17 @@ class _MainScreenState extends State<MainScreen> {
             builder: (context) {
               return Padding(
                 padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                  bottom: MediaQuery
+                      .of(context)
+                      .viewInsets
+                      .bottom,
                 ),
                 child: RoundedContainer(
                   radius: 20,
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                  color: Theme.of(context).canvasColor,
+                  color: Theme
+                      .of(context)
+                      .canvasColor,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -76,7 +87,18 @@ class _MainScreenState extends State<MainScreen> {
                       Row(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              final date = await showDatePicker(context: context,
+                                  initialDate: _selectedDate,
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime.now().add(Duration(days: 365)));
+                              if(date!=null) {
+                                setState(() {
+                                  _isDateSelected = true;
+                                  _selectedDate = date;
+                                });
+                              }
+                            },
                             icon: Icon(Icons.calendar_month),
                             padding: EdgeInsets.zero,
                             // 패딩 제거
@@ -89,6 +111,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                           ),
                           SizedBox(width: 6),
+                          if(_isDateSelected) Text(_selectedDate.formattedDate),
                           IconButton(
                             onPressed: () {},
                             icon: Icon(Icons.flag),
