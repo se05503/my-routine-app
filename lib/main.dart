@@ -64,71 +64,81 @@ class _MainScreenState extends State<MainScreen> {
           showModalBottomSheet(
             context: context,
             builder: (context) {
-              return RoundedContainer(
-                radius: 20,
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                color: Theme.of(context).canvasColor,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "무엇을 하고 싶으신가요?",
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.zero,
-                      ),
-                    ),
-                    SizedBox(height: 6,),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "설명",
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.zero,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.calendar_month),
-                          padding: EdgeInsets.zero, // 패딩 제거
-                          constraints: const BoxConstraints(), // 최소 크기 제약 제거
-                          visualDensity: VisualDensity.compact, // 시각적 밀도 압축
-                          style: IconButton.styleFrom(
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: RoundedContainer(
+                  radius: 20,
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  color: Theme.of(context).canvasColor,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          hintText: "무엇을 하고 싶으신가요?",
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
                         ),
-                        SizedBox(width: 6,),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.flag),
-                          padding: EdgeInsets.zero,
-                          // 패딩 제거
-                          constraints: const BoxConstraints(),
-                          // 최소 크기 제약 제거
-                          visualDensity: VisualDensity.compact, // 시각적 밀도 압축
-                          style: IconButton.styleFrom(
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
+                      ),
+                      SizedBox(height: 6),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: "설명",
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
                         ),
-                        Spacer(),
-                        FilledButton(
-                          onPressed: () {},
-                          child: Text("추가"),
-                          style: FilledButton.styleFrom(
-                            minimumSize: Size.zero,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.calendar_month),
+                            padding: EdgeInsets.zero,
+                            // 패딩 제거
+                            constraints: const BoxConstraints(),
+                            // 최소 크기 제약 제거
+                            visualDensity: VisualDensity.compact,
+                            // 시각적 밀도 압축
+                            style: IconButton.styleFrom(
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          SizedBox(width: 6),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.flag),
+                            padding: EdgeInsets.zero,
+                            // 패딩 제거
+                            constraints: const BoxConstraints(),
+                            // 최소 크기 제약 제거
+                            visualDensity: VisualDensity.compact,
+                            // 시각적 밀도 압축
+                            style: IconButton.styleFrom(
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                          ),
+                          Spacer(),
+                          FilledButton(
+                            onPressed: () {},
+                            child: Text("추가"),
+                            style: FilledButton.styleFrom(
+                              minimumSize: Size.zero,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
