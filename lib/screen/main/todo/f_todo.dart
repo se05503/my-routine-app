@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_routine_app/data/memory/todo_holder.dart';
 import '../../../common/datetime_extension.dart';
-import '../../../data/vo_todo.dart';
+import '../../../data/memory/vo_todo.dart';
 import '../../widget/w_rounded_container.dart';
 
 class TodoFragment extends StatefulWidget {
@@ -99,7 +100,19 @@ class _TodoFragmentState extends State<TodoFragment> {
                             Spacer(),
                             FilledButton(
                               onPressed: () {
-
+                                if (_titleController.text.trim().isEmpty) {
+                                  return;
+                                }
+                                final todoItem = TodoItem(
+                                  id: DateTime.now().millisecondsSinceEpoch,
+                                  title: _titleController.text,
+                                  description:
+                                  _descriptionController.text.trim().isEmpty
+                                      ? null
+                                      : _descriptionController.text,
+                                  deadline: _selectedDate,
+                                );
+                                TodoHolder.of(context).notifier.addTodo(todoItem);
                               },
                               style: FilledButton.styleFrom(
                                 minimumSize: Size.zero,
