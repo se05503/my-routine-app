@@ -83,7 +83,7 @@ class _FabTodoState extends State<FabTodo> {
                         ),
                         SizedBox(width: 6),
                         if (_selectedDate != null)
-                          Text(_selectedDate!.formattedDate),
+                          Text(_selectedDate!.relativeDate),
                         IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.flag),
