@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../widget/w_drawer_menu.dart';
 import '../../widget/w_fab_todo.dart';
+import '../../widget/w_todo_list.dart';
 
 class TodoFragment extends StatefulWidget {
   const TodoFragment({super.key});
@@ -14,9 +15,12 @@ class _TodoFragmentState extends State<TodoFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(title: Text("마이 루틴")),
       drawer: DrawerMenu(),
-      body: Placeholder(),
+      body: Column(children: [
+        TodoList()
+      ],),
       floatingActionButton: FabTodo(),
     );
   }
