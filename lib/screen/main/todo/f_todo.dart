@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_routine_app/data/memory/todo_holder.dart';
 import '../../../common/datetime_extension.dart';
 import '../../../data/memory/vo_todo.dart';
+import '../../widget/w_drawer_menu.dart';
 import '../../widget/w_rounded_container.dart';
 
 class TodoFragment extends StatefulWidget {
@@ -19,6 +20,8 @@ class _TodoFragmentState extends State<TodoFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("마이 루틴"),),
+      drawer: DrawerMenu(),
       body: Placeholder(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

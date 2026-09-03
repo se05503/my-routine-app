@@ -16,10 +16,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('My Routine'),
-      ),
       body: Center(child: _screens[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
         items: [
