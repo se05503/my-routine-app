@@ -14,88 +14,124 @@ class TodoItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RoundedContainer(
-      margin: EdgeInsets.only(left: 16, right: 16, top: 12),
-      color: Colors.white,
-      child: Column(
-        children: [
-          Row(
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 12),
+      child: Dismissible(
+        key: ValueKey(todoItem.id),
+        onDismissed: (direction) {
+          context.holder.removeTodoItem(todoItem);
+        },
+        background: RoundedContainer(
+          color: Colors.red,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: () async {
-                  switch (todoItem.status) {
-                    case TodoStatus.incomplete:
-                      todoItem.status = TodoStatus.ongoing;
-                      context.holder.notifier.notify();
-                    case TodoStatus.ongoing:
-                      todoItem.status = TodoStatus.complete;
-                      context.holder.notifier.notify();
-                    case TodoStatus.complete:
-                      final result = await showDialog<bool>(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            content: Text("정말로 처음 상태로 변경하시겠어요?"),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, false),
-                                child: Text("취소"),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, true),
-                                child: Text("확인"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                      if (result == true && context.mounted) {
-                        todoItem.status = TodoStatus.incomplete;
-                        context.holder.notifier.notify();
-                      }
-                  }
-                },
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: switch (todoItem.status) {
-                    TodoStatus.incomplete => const Checkbox(
-                      value: false,
-                      onChanged: null,
-                    ),
-                    TodoStatus.ongoing => const RiveBottle(),
-                    TodoStatus.complete => Checkbox(
-                      value: true,
-                      onChanged: null,
-                      fillColor: WidgetStateProperty.all(Colors.grey),
-                    ),
-                  },
-                ),
-              ),
-              Expanded(child: Text(todoItem.title)),
-              IconButton(onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return TodoDialog(todoForEdit: todoItem);
-                  },
-                );
-              }, icon: const Icon(Icons.edit)),
+              SizedBox(width: 20,),
+              Icon(Icons.restore_from_trash, color: Colors.white,),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-            child: Row(
-              children: [
-                (todoItem.deadline != null)
-                    ? Text(todoItem.deadline!.relativeDate)
-                    : Text("기한 없음"),
-                Spacer(),
-                Text("기본함"),
-              ],
-            ),
+        ),
+        secondaryBackground: RoundedContainer(
+          color: Colors.green,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(Icons.add, color: Colors.white,),
+              SizedBox(width: 20,),
+            ],
           ),
-        ],
+        ),
+        child: RoundedContainer(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      switch (todoItem.status) {
+                        case TodoStatus.incomplete:
+                          todoItem.status = TodoStatus.ongoing;
+                          context.holder.notifier.notify();
+                        case TodoStatus.ongoing:
+                          todoItem.status = TodoStatus.complete;
+                          context.holder.notifier.notify();
+                        case TodoStatus.complete:
+                          final result = await showDialog<bool>(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Text("정말로 처음 상태로 변경하시겠어요?"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, false),
+                                    child: Text("취소"),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context, true),
+                                    child: Text("확인"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          if (result == true && context.mounted) {
+                            todoItem.status = TodoStatus.incomplete;
+                            context.holder.notifier.notify();
+                          }
+                      }
+                    },
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: switch (todoItem.status) {
+                        TodoStatus.incomplete => const Checkbox(
+                          value: false,
+                          onChanged: null,
+                        ),
+                        TodoStatus.ongoing => const RiveBottle(),
+                        TodoStatus.complete => Checkbox(
+                          value: true,
+                          onChanged: null,
+                          fillColor: WidgetStateProperty.all(Colors.grey),
+                        ),
+                      },
+                    ),
+                  ),
+                  Expanded(child: Text(todoItem.title)),
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return TodoDialog(todoForEdit: todoItem);
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.edit),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 8.0,
+                  right: 8.0,
+                  bottom: 8.0,
+                ),
+                child: Row(
+                  children: [
+                    (todoItem.deadline != null)
+                        ? Text(todoItem.deadline!.relativeDate)
+                        : Text("기한 없음"),
+                    Spacer(),
+                    Text("기본함"),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

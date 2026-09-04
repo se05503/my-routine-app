@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_routine_app/data/memory/todo_notifier.dart';
+import 'package:my_routine_app/data/memory/vo_todo.dart';
 
 class TodoHolder extends InheritedWidget {
   final TodoNotifier notifier;
@@ -14,6 +15,11 @@ class TodoHolder extends InheritedWidget {
   static TodoHolder _of(BuildContext context) {
     TodoHolder inherited = (context.dependOnInheritedWidgetOfExactType<TodoHolder>())!;
     return inherited;
+  }
+
+  void removeTodoItem(TodoItem todoItem) {
+    notifier.value.remove(todoItem);
+    notifier.notify();
   }
 }
 
