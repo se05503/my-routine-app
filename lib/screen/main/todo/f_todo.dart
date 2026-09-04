@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widget/w_dialog_todo.dart';
 import '../../widget/w_drawer_menu.dart';
-import '../../widget/w_fab_todo.dart';
 import '../../widget/w_todo_list.dart';
 
 class TodoFragment extends StatefulWidget {
@@ -21,7 +21,17 @@ class _TodoFragmentState extends State<TodoFragment> {
       body: Column(children: [
         TodoList()
       ],),
-      floatingActionButton: FabTodo(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return TodoDialog();
+            },
+          );
+        },
+        child: const Icon(Icons.add),
+      )
     );
   }
 }

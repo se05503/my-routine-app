@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_routine_app/common/datetime_extension.dart';
 import 'package:my_routine_app/data/memory/todo_holder.dart';
+import 'package:my_routine_app/screen/widget/w_dialog_todo.dart';
 import 'package:my_routine_app/screen/widget/w_rive_bottle.dart';
-import 'package:my_routine_app/screen/widget/w_rive_crab.dart';
 import 'package:my_routine_app/screen/widget/w_rounded_container.dart';
 import '../../data/memory/todo_status.dart';
 import '../../data/memory/vo_todo.dart';
@@ -73,7 +73,14 @@ class TodoItemWidget extends StatelessWidget {
                 ),
               ),
               Expanded(child: Text(todoItem.title)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+              IconButton(onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return TodoDialog(todoForEdit: todoItem);
+                  },
+                );
+              }, icon: const Icon(Icons.edit)),
             ],
           ),
           Padding(

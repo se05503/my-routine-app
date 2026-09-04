@@ -2,11 +2,11 @@ import 'package:my_routine_app/data/memory/todo_status.dart';
 
 class TodoItem {
   int id;
-  final String title;
-  final String? description;
+  String title;
+  String? description;
   final DateTime createdTime;
-  final DateTime? modifiedTime;
-  final DateTime? deadline;
+  DateTime? modifiedTime;
+  DateTime? deadline;
   TodoStatus status;
 
   TodoItem(
