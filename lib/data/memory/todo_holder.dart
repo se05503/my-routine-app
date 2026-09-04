@@ -11,8 +11,12 @@ class TodoHolder extends InheritedWidget {
     return true;
   }
 
-  static TodoHolder of(BuildContext context) {
+  static TodoHolder _of(BuildContext context) {
     TodoHolder inherited = (context.dependOnInheritedWidgetOfExactType<TodoHolder>())!;
     return inherited;
   }
+}
+
+extension TodoHolderExtension on BuildContext {
+  TodoHolder get holder => TodoHolder._of(this);
 }

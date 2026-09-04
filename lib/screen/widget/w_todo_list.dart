@@ -8,7 +8,7 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: TodoHolder.of(context).notifier,
+      valueListenable: context.holder.notifier,
       builder: (context, todoList, child) {
         return todoList.isEmpty
             ? Text("할일을 작성해보세요")

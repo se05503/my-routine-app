@@ -109,7 +109,7 @@ class _FabTodoState extends State<FabTodo> {
                                   : _descriptionController.text,
                               deadline: _selectedDate,
                             );
-                            TodoHolder.of(context).notifier.addTodo(todoItem);
+                            context.holder.notifier.addTodo(todoItem);
                           },
                           style: FilledButton.styleFrom(
                             minimumSize: Size.zero,
