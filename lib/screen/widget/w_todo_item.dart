@@ -7,10 +7,10 @@ import 'package:my_routine_app/screen/widget/w_rounded_container.dart';
 import '../../data/memory/todo_status.dart';
 import '../../data/memory/vo_todo.dart';
 
-class TodoItemWidget extends StatelessWidget {
+class TodoItemWidget extends StatelessWidget with TodoDataProvider {
   final TodoItem todoItem;
 
-  const TodoItemWidget(this.todoItem, {super.key});
+  TodoItemWidget(this.todoItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class TodoItemWidget extends StatelessWidget {
       child: Dismissible(
         key: ValueKey(todoItem.id),
         onDismissed: (direction) {
-          context.holder.removeTodoItem(todoItem);
+          todoDataHolder.removeTodoItem(todoItem);
         },
         background: RoundedContainer(
           color: Colors.red,
@@ -52,10 +52,10 @@ class TodoItemWidget extends StatelessWidget {
                       switch (todoItem.status) {
                         case TodoStatus.incomplete:
                           todoItem.status = TodoStatus.ongoing;
-                          context.holder.notifier.notify();
+                          todoDataHolder.notify();
                         case TodoStatus.ongoing:
                           todoItem.status = TodoStatus.complete;
-                          context.holder.notifier.notify();
+                          todoDataHolder.notify();
                         case TodoStatus.complete:
                           final result = await showDialog<bool>(
                             context: context,
@@ -78,7 +78,7 @@ class TodoItemWidget extends StatelessWidget {
                           );
                           if (result == true && context.mounted) {
                             todoItem.status = TodoStatus.incomplete;
-                            context.holder.notifier.notify();
+                            todoDataHolder.notify();
                           }
                       }
                     },

@@ -12,7 +12,7 @@ class TodoDialog extends StatefulWidget {
   State<TodoDialog> createState() => _TodoDialogState();
 }
 
-class _TodoDialogState extends State<TodoDialog> {
+class _TodoDialogState extends State<TodoDialog> with TodoDataProvider {
   DateTime? _selectedDate;
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -117,7 +117,7 @@ class _TodoDialogState extends State<TodoDialog> {
                             : _descriptionController.text,
                         deadline: _selectedDate,
                       );
-                      context.holder.notifier.addTodo(todoItem);
+                      todoDataHolder.addTodo(todoItem);
                     }  else {
                       // 기존 할일을 수정하는 경우
                       widget.todoForEdit!.title = _titleController.text;
@@ -127,7 +127,7 @@ class _TodoDialogState extends State<TodoDialog> {
                           : _descriptionController.text;
                       widget.todoForEdit!.modifiedTime = DateTime.now();
                       widget.todoForEdit!.deadline = _selectedDate;
-                      context.holder.notifier.notify();
+                      todoDataHolder.notify();
                     }
                     Navigator.pop(context);
                   },
