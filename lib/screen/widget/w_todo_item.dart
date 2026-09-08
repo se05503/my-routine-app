@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_routine_app/common/datetime_extension.dart';
 import 'package:my_routine_app/data/memory/todo_holder.dart';
 import 'package:my_routine_app/screen/widget/w_dialog_todo.dart';
@@ -7,10 +8,10 @@ import 'package:my_routine_app/screen/widget/w_rounded_container.dart';
 import '../../data/memory/todo_status.dart';
 import '../../data/memory/vo_todo.dart';
 
-class TodoItemWidget extends StatelessWidget with TodoDataProvider {
+class TodoItemWidget extends GetView<TodoDataHolder> {
   final TodoItem todoItem;
 
-  TodoItemWidget(this.todoItem, {super.key});
+  const TodoItemWidget(this.todoItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class TodoItemWidget extends StatelessWidget with TodoDataProvider {
       child: Dismissible(
         key: ValueKey(todoItem.id),
         onDismissed: (direction) {
-          todoDataHolder.removeTodoItem(todoItem);
+          controller.removeTodoItem(todoItem);
         },
         background: RoundedContainer(
           color: Colors.red,
@@ -52,10 +53,10 @@ class TodoItemWidget extends StatelessWidget with TodoDataProvider {
                       switch (todoItem.status) {
                         case TodoStatus.incomplete:
                           todoItem.status = TodoStatus.ongoing;
-                          todoDataHolder.notify();
+                          controller.notify();
                         case TodoStatus.ongoing:
                           todoItem.status = TodoStatus.complete;
-                          todoDataHolder.notify();
+                          controller.notify();
                         case TodoStatus.complete:
                           final result = await showDialog<bool>(
                             context: context,
@@ -78,7 +79,7 @@ class TodoItemWidget extends StatelessWidget with TodoDataProvider {
                           );
                           if (result == true && context.mounted) {
                             todoItem.status = TodoStatus.incomplete;
-                            todoDataHolder.notify();
+                            controller.notify();
                           }
                       }
                     },

@@ -19,5 +19,5 @@ class TodoDataHolder extends GetxController {
 }
 
 mixin class TodoDataProvider {
-  late final TodoDataHolder todoDataHolder = Get.find();
+  late TodoDataHolder todoDataHolder = Get.find();
 }
