@@ -24,18 +24,10 @@ class _PomodoroFragmentState extends State<PomodoroFragment> {
               width: 250,
               height: 250,
               child: CircularProgressIndicator(
-                value: 1.0,
-                strokeWidth: 10,
-                color: Colors.grey[300],
-              ),
-            ),
-            SizedBox(
-              width: 250,
-              height: 250,
-              child: CircularProgressIndicator(
                 value: 0.7,
                 strokeWidth: 10,
                 color: Colors.blue,
+                backgroundColor: Colors.grey[300],
                 strokeCap: StrokeCap.round,
               ),
             ),
