@@ -11,10 +11,12 @@ class TodoDataHolder extends GetxController {
   void removeTodoItem(TodoItem todoItem) {
     todoList.remove(todoItem);
     todoList.refresh();
+    update();
   }
 
   void notify() {
     todoList.refresh();
+    update();
   }
 }
 
