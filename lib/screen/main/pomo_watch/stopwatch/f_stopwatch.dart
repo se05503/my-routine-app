@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../widget/w_dialog_select_todo.dart';
 import '../../../widget/w_timer_painter.dart';
 
 class StopwatchFragment extends StatefulWidget {
@@ -15,9 +16,16 @@ class _StopwatchFragmentState extends State<StopwatchFragment> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [Text("할일 선택"), Icon(Icons.keyboard_arrow_right_rounded)],
+        GestureDetector(
+          onTap: () {
+            showDialog(context: context, builder: (context) {
+              return SelectTodoDialog();
+            });
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [Text("할일 선택"), Icon(Icons.keyboard_arrow_right_rounded)],
+          ),
         ),
         Stack(
           alignment: Alignment.center,

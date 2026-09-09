@@ -4,15 +4,15 @@ import '../../common/datetime_extension.dart';
 import '../../data/memory/todo_holder.dart';
 import '../../data/memory/vo_todo.dart';
 
-class TodoDialog extends StatefulWidget {
+class AddOrEditTodoDialog extends StatefulWidget {
   final TodoItem? todoForEdit;
-  const TodoDialog({this.todoForEdit, super.key});
+  const AddOrEditTodoDialog({this.todoForEdit, super.key});
 
   @override
-  State<TodoDialog> createState() => _TodoDialogState();
+  State<AddOrEditTodoDialog> createState() => _AddOrEditTodoDialogState();
 }
 
-class _TodoDialogState extends State<TodoDialog> with TodoDataProvider {
+class _AddOrEditTodoDialogState extends State<AddOrEditTodoDialog> with TodoDataProvider {
   DateTime? _selectedDate;
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../widget/w_dialog_todo.dart';
+import '../../widget/w_dialog_add_or_edit_todo.dart';
 import '../../widget/w_drawer_menu.dart';
 import '../../widget/w_todo_list.dart';
 
@@ -26,7 +26,7 @@ class _TodoFragmentState extends State<TodoFragment> {
           showModalBottomSheet(
             context: context,
             builder: (context) {
-              return TodoDialog();
+              return AddOrEditTodoDialog();
             },
           );
         },

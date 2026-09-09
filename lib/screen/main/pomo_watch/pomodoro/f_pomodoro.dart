@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../widget/w_dialog_select_todo.dart';
+
 class PomodoroFragment extends StatefulWidget {
   const PomodoroFragment({super.key});
 
@@ -13,9 +15,16 @@ class _PomodoroFragmentState extends State<PomodoroFragment> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [Text("할일 선택"), Icon(Icons.keyboard_arrow_right_rounded)],
+        GestureDetector(
+          onTap: () {
+            showDialog(context: context, builder: (context) {
+              return SelectTodoDialog();
+            });
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [Text("할일 선택"), Icon(Icons.keyboard_arrow_right_rounded)],
+          ),
         ),
         Stack(
           alignment: Alignment.center,

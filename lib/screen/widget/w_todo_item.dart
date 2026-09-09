@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_routine_app/common/datetime_extension.dart';
 import 'package:my_routine_app/data/memory/todo_holder.dart';
-import 'package:my_routine_app/screen/widget/w_dialog_todo.dart';
+import 'package:my_routine_app/screen/widget/w_dialog_add_or_edit_todo.dart';
 import 'package:my_routine_app/screen/widget/w_rive_bottle.dart';
 import 'package:my_routine_app/screen/widget/w_rounded_container.dart';
 import '../../data/memory/todo_status.dart';
@@ -106,7 +106,7 @@ class TodoItemWidget extends GetView<TodoDataHolder> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) {
-                          return TodoDialog(todoForEdit: todoItem);
+                          return AddOrEditTodoDialog(todoForEdit: todoItem);
                         },
                       );
                     },
