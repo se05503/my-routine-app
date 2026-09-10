@@ -17,7 +17,7 @@ class _HabitWeeklyHistoryState extends State<HabitWeeklyHistory> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface
       ),
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
