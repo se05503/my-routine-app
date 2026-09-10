@@ -18,4 +18,14 @@ extension DatetimeExtension on DateTime {
       return "$diff일 남음";
     }
   }
+
+  String get firstDayOfWeek {
+    DateTime firstDayOfWeek = subtract(Duration(days: weekday - 1));
+    return "${firstDayOfWeek.month}월 ${firstDayOfWeek.day}일";
+  }
+
+  String get lastDayOfWeek {
+    DateTime lastDayOfWeek = add(Duration(days: 7 - weekday));
+    return "${lastDayOfWeek.month}월 ${lastDayOfWeek.day}일";
+  }
 }
