@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class HabitItem extends StatelessWidget {
+class WeeklyHabitItem extends StatelessWidget {
   final String title;
   final String imagePath;
   final List<bool> status;
-  final Color habitColor;
+  final Color color;
 
-  const HabitItem({
+  const WeeklyHabitItem({
     super.key,
     required this.title,
     required this.imagePath,
     required this.status,
-    required this.habitColor,
+    required this.color,
   });
 
   @override
@@ -27,7 +27,7 @@ class HabitItem extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 12,
-                  backgroundColor: habitColor,
+                  backgroundColor: color,
                   backgroundImage: AssetImage(imagePath),
                 ),
                 SizedBox(width: 8),
@@ -46,7 +46,7 @@ class HabitItem extends StatelessWidget {
                   width: 20,
                   height: 20,
                   decoration: BoxDecoration(
-                    color: isDone ? habitColor : Colors.grey[200],
+                    color: isDone ? color : Colors.grey[200],
                     borderRadius: BorderRadius.circular(6),
                     // border: isDone ? null : Border.all(color: Colors.grey),
                   ),

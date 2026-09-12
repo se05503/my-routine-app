@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:my_routine_app/common/datetime_extension.dart';
+import 'package:my_routine_app/data/memory/vo_habit.dart';
 import 'package:my_routine_app/screen/widget/w_habit_item.dart';
 
 class HabitWeeklyHistory extends StatefulWidget {
-  const HabitWeeklyHistory({super.key});
+  final List<HabitItem> habitList;
+
+  const HabitWeeklyHistory(this.habitList, {super.key});
 
   @override
   State<HabitWeeklyHistory> createState() => _HabitWeeklyHistoryState();
 }
 
 class _HabitWeeklyHistoryState extends State<HabitWeeklyHistory> {
-  DateTime baseDate = DateTime.now();
+  DateTime baseDate = DateTime.now().onlyDate;
+
+  // 주간 데이터를 추출하는 함수
+  List<bool> getWeeklyStatus(Set<DateTime> totalStatus, DateTime baseDate) {
+    DateTime monday = baseDate.subtract(Duration(days: baseDate.weekday - 1));
+    return List.generate(7, (index) {
+      DateTime date = monday.add(Duration(days: index)); // 월요일 ~ 일요일
+      return totalStatus.contains(date);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Theme.of(context).colorScheme.surface
+        color: Theme.of(context).colorScheme.surface,
       ),
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
@@ -100,24 +112,14 @@ class _HabitWeeklyHistoryState extends State<HabitWeeklyHistory> {
               ),
             ],
           ),
-          HabitItem(
-            title: "산책하기",
-            imagePath: "assets/image/habit_stroll.png",
-            habitColor: Colors.green.shade300,
-            status: [true, true, false, true, false, true, true],
-          ),
-          HabitItem(
-            title: "일기쓰기",
-            imagePath: "assets/image/habit_diary.png",
-            habitColor: Colors.orange.shade300,
-            status: [true, true, false, false, false, true, false],
-          ),
-          HabitItem(
-            title: "책 읽기",
-            imagePath: "assets/image/habit_book.png",
-            habitColor: Colors.blue.shade300,
-            status: [true, false, false, false, false, true, true],
-          ),
+          ...widget.habitList.map((habit) {
+            return WeeklyHabitItem(
+              title: habit.title,
+              imagePath: habit.imagePath,
+              status: getWeeklyStatus(habit.status, baseDate),
+              color: habit.color,
+            );
+          }),
         ],
       ),
     );

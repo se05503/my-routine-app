@@ -28,4 +28,7 @@ extension DatetimeExtension on DateTime {
     DateTime lastDayOfWeek = add(Duration(days: 7 - weekday));
     return "${lastDayOfWeek.month}월 ${lastDayOfWeek.day}일";
   }
+
+  // 시간, 분, 초를 제외한 년, 월, 일을 담는 DateTime
+  DateTime get onlyDate => DateTime(year, month, day);
 }
