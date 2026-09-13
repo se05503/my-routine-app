@@ -47,7 +47,7 @@ class WeeklyHabitItem extends StatelessWidget {
                   height: 20,
                   decoration: BoxDecoration(
                     color: isDone ? color : Colors.grey[200],
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(4),
                     // border: isDone ? null : Border.all(color: Colors.grey),
                   ),
                   // child: isDone ? null : Icon(Icons.close, size: 20),

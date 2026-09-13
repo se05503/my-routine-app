@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_routine_app/common/datetime_extension.dart';
 import 'package:my_routine_app/data/memory/vo_habit.dart';
-import 'package:my_routine_app/screen/widget/w_habit_item.dart';
+import 'package:my_routine_app/screen/widget/w_habit_weekly_item.dart';
 
 class HabitWeeklyHistory extends StatefulWidget {
   final List<HabitItem> habitList;

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MonthlyHabitItem extends StatelessWidget {
-  final Color habitColor;
-  final Icon habitIcon;
-  final String habitName;
-  final List<bool> habitStatus;
-  final int dayOfMonth;
+  final String title;
+  final String imagePath;
+  final Color color;
+  final List<bool> status;
 
   const MonthlyHabitItem({
     super.key,
-    required this.habitColor,
-    required this.habitIcon,
-    required this.habitName,
-    required this.dayOfMonth, required this.habitStatus,
+    required this.color,
+    required this.imagePath,
+    required this.title,
+    required this.status,
   });
 
   @override
@@ -21,9 +20,9 @@ class MonthlyHabitItem extends StatelessWidget {
       children: [
         Row(
           children: [
-            CircleAvatar(backgroundColor: habitColor, child: habitIcon),
-            SizedBox(width: 4),
-            Text(habitName),
+            CircleAvatar(radius: 12, backgroundColor: color, backgroundImage: AssetImage(imagePath)),
+            SizedBox(width: 8),
+            Text(title),
           ],
         ),
         SizedBox(height: 8),
@@ -33,10 +32,11 @@ class MonthlyHabitItem extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           mainAxisSpacing: 4,
           crossAxisSpacing: 4,
-          children: List.generate(dayOfMonth, (index) {
+          children: List.generate(status.length, (index) {
             return Container(
               decoration: BoxDecoration(
-                color: habitStatus[index] ? habitColor : Colors.grey[200]
+                color: status[index] ? color : Colors.grey[200],
+                borderRadius: BorderRadius.circular(4),
               ),
             );
           }),

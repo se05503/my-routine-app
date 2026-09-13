@@ -51,7 +51,7 @@ class _HabitFragmentState extends State<HabitFragment> {
           DateTime(2026, 09, 06),
           DateTime(2026, 09, 09),
           DateTime(2026, 09, 12),
-        }, color: Colors.green.shade300
+        }, color: Colors.blue.shade300
     ),
   ];
 
@@ -64,9 +64,8 @@ class _HabitFragmentState extends State<HabitFragment> {
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           // 내가 가진 전체 습관들
-          // 주간 습관 히스토리
           HabitWeeklyHistory(habitList),
-          // 월간 습관 히스토리
+          SizedBox(height: 12,),
           HabitMonthlyHistory(habitList)
           // 연간 습관 히스토리
         ]),
