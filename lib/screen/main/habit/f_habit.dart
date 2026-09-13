@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../data/memory/vo_habit.dart';
+import '../../widget/w_habit_daily_history.dart';
 import '../../widget/w_habit_monthly_history.dart';
 import '../../widget/w_habit_weekly_history.dart';
 
@@ -60,15 +61,18 @@ class _HabitFragmentState extends State<HabitFragment> {
     return Scaffold(
       appBar: AppBar(title: Text("습관")),
       backgroundColor: Color(0x7BA6C4FF),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          // 내가 가진 전체 습관들
-          HabitWeeklyHistory(habitList),
-          SizedBox(height: 12,),
-          HabitMonthlyHistory(habitList)
-          // 연간 습관 히스토리
-        ]),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            HabitDailyHistory(habitList),
+            SizedBox(height: 12,),
+            HabitWeeklyHistory(habitList),
+            SizedBox(height: 12,),
+            HabitMonthlyHistory(habitList)
+            // 연간 습관 히스토리
+          ]),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
