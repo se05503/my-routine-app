@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:my_routine_app/common/datetime_extension.dart';
 import 'package:my_routine_app/data/memory/vo_habit.dart';
 import 'package:my_routine_app/screen/widget/w_habit_weekly_item.dart';
@@ -13,6 +14,7 @@ class HabitWeeklyHistory extends StatefulWidget {
 }
 
 class _HabitWeeklyHistoryState extends State<HabitWeeklyHistory> {
+  final TextEditingController _weeklyReflectionController = TextEditingController();
   DateTime baseDate = DateTime.now().onlyDate;
 
   // 주간 데이터를 추출하는 함수
@@ -64,50 +66,14 @@ class _HabitWeeklyHistoryState extends State<HabitWeeklyHistory> {
                 flex: 7,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
+                  children: ["월", "화", "수", "목", "금", "토", "일"].map((day) {
+                    return Container(
                       width: 20,
                       height: 20,
                       alignment: Alignment.center,
-                      child: Text("월"),
-                    ),
-                    Container(
-                      width: 20,
-                      height: 20,
-                      alignment: Alignment.center,
-                      child: Text("화"),
-                    ),
-                    Container(
-                      width: 20,
-                      height: 20,
-                      alignment: Alignment.center,
-                      child: Text("수"),
-                    ),
-                    Container(
-                      width: 20,
-                      height: 20,
-                      alignment: Alignment.center,
-                      child: Text("목"),
-                    ),
-                    Container(
-                      width: 20,
-                      height: 20,
-                      alignment: Alignment.center,
-                      child: Text("금"),
-                    ),
-                    Container(
-                      width: 20,
-                      height: 20,
-                      alignment: Alignment.center,
-                      child: Text("토"),
-                    ),
-                    Container(
-                      width: 20,
-                      height: 20,
-                      alignment: Alignment.center,
-                      child: Text("일"),
-                    ),
-                  ],
+                      child: Text(day),
+                    );
+                  }).toList(),
                 ),
               ),
             ],
@@ -120,6 +86,38 @@ class _HabitWeeklyHistoryState extends State<HabitWeeklyHistory> {
               color: habit.color,
             );
           }),
+          SizedBox(height: 12),
+          TextField(
+            controller: _weeklyReflectionController,
+            decoration: InputDecoration(
+                hintText: "이번주의 성찰 일지를 작성해보세요",
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                filled: true,
+                fillColor: Colors.grey[200],
+                border: InputBorder.none,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide.none,
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    "assets/icon/ic_send.svg",
+                    colorFilter: ColorFilter.mode(
+                      Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+                isDense: true
+            ),
+            style: TextStyle(color: Colors.black),
+            maxLines: null,
+          ),
         ],
       ),
     );
