@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_routine_app/screen/main/habit/s_develop_new_habit.dart';
 import '../../../data/memory/vo_habit.dart';
 import '../../widget/w_habit_daily_history.dart';
 import '../../widget/w_habit_monthly_history.dart';
@@ -12,47 +13,49 @@ class HabitFragment extends StatefulWidget {
 }
 
 class _HabitFragmentState extends State<HabitFragment> {
-
   final List<HabitItem> habitList = [
     HabitItem(
-        title: "산책하기",
-        imagePath: "assets/image/habit_stroll.png",
-        status: {
-          DateTime(2026, 08, 26),
-          DateTime(2026, 08, 29),
-          DateTime(2026, 09, 01),
-          DateTime(2026, 09, 03),
-          DateTime(2026, 09, 04),
-          DateTime(2026, 09, 07),
-          DateTime(2026, 09, 08),
-          DateTime(2026, 09, 11),
-          DateTime(2026, 09, 12),
-        }, color: Colors.green.shade300
+      title: "산책하기",
+      imagePath: "assets/image/habit_stroll.png",
+      status: {
+        DateTime(2026, 08, 26),
+        DateTime(2026, 08, 29),
+        DateTime(2026, 09, 01),
+        DateTime(2026, 09, 03),
+        DateTime(2026, 09, 04),
+        DateTime(2026, 09, 07),
+        DateTime(2026, 09, 08),
+        DateTime(2026, 09, 11),
+        DateTime(2026, 09, 12),
+      },
+      color: Colors.green.shade300,
     ),
     HabitItem(
-        title: "일기쓰기",
-        imagePath: "assets/image/habit_diary.png",
-        status: {
-          DateTime(2026, 08, 28),
-          DateTime(2026, 08, 30),
-          DateTime(2026, 09, 04),
-          DateTime(2026, 09, 07),
-          DateTime(2026, 09, 08),
-        }, color: Colors.orange.shade300
+      title: "일기쓰기",
+      imagePath: "assets/image/habit_diary.png",
+      status: {
+        DateTime(2026, 08, 28),
+        DateTime(2026, 08, 30),
+        DateTime(2026, 09, 04),
+        DateTime(2026, 09, 07),
+        DateTime(2026, 09, 08),
+      },
+      color: Colors.orange.shade300,
     ),
     HabitItem(
-        title: "책 읽기",
-        imagePath: "assets/image/habit_book.png",
-        status: {
-          DateTime(2026, 08, 22),
-          DateTime(2026, 08, 31),
-          DateTime(2026, 09, 01),
-          DateTime(2026, 09, 02),
-          DateTime(2026, 09, 03),
-          DateTime(2026, 09, 06),
-          DateTime(2026, 09, 09),
-          DateTime(2026, 09, 12),
-        }, color: Colors.blue.shade300
+      title: "책 읽기",
+      imagePath: "assets/image/habit_book.png",
+      status: {
+        DateTime(2026, 08, 22),
+        DateTime(2026, 08, 31),
+        DateTime(2026, 09, 01),
+        DateTime(2026, 09, 02),
+        DateTime(2026, 09, 03),
+        DateTime(2026, 09, 06),
+        DateTime(2026, 09, 09),
+        DateTime(2026, 09, 12),
+      },
+      color: Colors.blue.shade300,
     ),
   ];
 
@@ -64,19 +67,24 @@ class _HabitFragmentState extends State<HabitFragment> {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            HabitDailyHistory(habitList),
-            SizedBox(height: 12,),
-            HabitWeeklyHistory(habitList),
-            SizedBox(height: 12,),
-            HabitMonthlyHistory(habitList)
-            // 연간 습관 히스토리
-          ]),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              HabitDailyHistory(habitList),
+              SizedBox(height: 12),
+              HabitWeeklyHistory(habitList),
+              SizedBox(height: 12),
+              HabitMonthlyHistory(habitList),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // 습관 추가 다이얼로그 띄우기
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DevelopNewHabitScreen()),
+          );
         },
         child: Icon(Icons.add),
       ),

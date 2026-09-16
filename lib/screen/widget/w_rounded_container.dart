@@ -20,9 +20,9 @@ class RoundedContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      padding: padding,
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: color,
+        color: color ?? Colors.white,
         borderRadius: BorderRadius.circular(radius ?? 10.0)
       ),
       child: child,
