@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:my_routine_app/screen/widget/w_rounded_container.dart';
 
 class DevelopNewHabitScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
     Colors.amber.shade400,
     Colors.green.shade400,
     Colors.blue.shade400,
-    Colors.purple.shade400
+    Colors.purple.shade400,
   ];
   Color? selectedColor;
 
@@ -121,8 +122,10 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _buildNoneColorItem(),
-                      ...colorPresets.map((color) => _buildColorPresetItem(color)),
-                      _buildColorPickerItem()
+                      ...colorPresets.map(
+                        (color) => _buildColorPresetItem(color),
+                      ),
+                      _buildColorPickerItem(),
                     ],
                   ),
                 ],
@@ -222,7 +225,7 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
 
   Widget _buildColorPickerItem() {
     return GestureDetector(
-      onTap: () {},
+      onTap: _showCustomColorPickerDialog,
       child: Container(
         width: 30,
         height: 30,
@@ -240,6 +243,46 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showCustomColorPickerDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("커스텀 색상 선택"),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: selectedColor ?? Colors.transparent,
+              onColorChanged: (color) {
+                setState(() {
+                  selectedColor = color;
+                });
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.grey,
+              ),
+              child: Text("취소"),
+            ),
+            TextButton(
+              // 선택된 색상 적용
+              onPressed: () => Navigator.pop(context),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.grey,
+              ),
+              child: Text("확인"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
