@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:my_routine_app/data/memory/vo_day.dart';
 import 'package:my_routine_app/screen/widget/w_rounded_container.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -25,6 +26,7 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
   ];
   Color? selectedColor;
   String iconName = "search";
+  Set<Day> selectedDays = {};
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,7 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
                           ),
                         ),
                         SizedBox(width: 8),
-                         Text("선택된 아이콘")
+                        Text("선택된 아이콘"),
                       ],
                     ),
                     SizedBox(height: 8),
@@ -124,7 +126,9 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
                                 });
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("알 수 없는 에러가 발생했습니다.")), // 한글 → 영어 변환 과정에서의 에러
+                                  SnackBar(
+                                    content: Text("알 수 없는 에러가 발생했습니다."),
+                                  ), // 한글 → 영어 변환 과정에서의 에러
                                 );
                               }
                             });
@@ -157,7 +161,16 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
                 color: Colors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("빈도")],
+                  children: [
+                    Text("빈도"),
+                    SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ...Day.values.map((day) => _buildDayItem(day))
+                      ],
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 16),
@@ -261,6 +274,37 @@ class _DevelopNewHabitScreenState extends State<DevelopNewHabitScreen> {
               Colors.blue,
               Colors.purple,
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDayItem(Day day) {
+    bool isSelected = selectedDays.contains(day);
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if(isSelected) {
+            selectedDays.remove(day);
+          } else {
+            selectedDays.add(day);
+          }
+        });
+      },
+      child: Container(
+        width: 30,
+        height: 30,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isSelected ? Colors.blueAccent : Colors.grey.shade200,
+        ),
+        child: Text(
+          day.krName,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
